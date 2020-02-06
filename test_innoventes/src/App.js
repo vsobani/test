@@ -13,7 +13,7 @@ class NewBind extends React.Component{
     super(props)
     this.state = {
       quantity : 1,
-      disabled : false
+      isEnable : false
     }
     this.MinusOne = this.MinusOne.bind(this);
     this.PlusOne = this.PlusOne.bind(this);
@@ -29,7 +29,7 @@ class NewBind extends React.Component{
     //   // console.log("assad")
     // };
     if (this.state.quantity>=5){
-      console.log(this.state.quantity,"asd")
+      console.log(this.state.quantity)
       this.setState({
         quantity: 5
       })
@@ -51,18 +51,29 @@ class NewBind extends React.Component{
       
     });
     
-    console.log(this.state.quantity);
+    // console.log(this.state.quantity);
     if (this.state.quantity <=5){
       console.log(this.state.quantity)
     }
   }
 
+  handleButtonEnable(event)
+       {
+         const value = this.target.value;
+         if(value.length > 0 )
+        {
+          // set the state of isEnable to be true to make the button to be enable
+          this.setState({isEnable : true})
+        }
+
+
+       }
+
   takeQuantity(event){
     let quantity = event.target.value;
-    if (quantity)
+    if (quantity.length > 1 && !this.state.isEnable)
         this.setState({
           quantity:parseInt(quantity)
-
         })
         console.log(quantity)    
 
@@ -81,8 +92,8 @@ class NewBind extends React.Component{
           <div>
             
           {/* <button className="plus"  onClick={this.PlusOne}> + </button> */}
-          {this.props.quantity < 5 ? <button className="plus"  onClick={this.PlusOne}> + </button>:this.quantity}
-          {this.props.quantity < 2 ? <button className="plus"  onClick={this.MinusOne}> - </button>:null}
+          {this.props.quantity < 2 ? <button className="plus"  onClick={this.PlusOne}> + </button>:this.quantity}
+          {this.props.quantity < 2 ? <button disabled={this.state.isEnable} className="plus"  onClick={this.MinusOne}> - </button>:null}
           {/* <button className="minus" onClick={this.MinusOne}> - </button><br/> */}
           {this.props.name}
           Quantity : <input name="quantity" onChange={this.takeQuantity} value={this.state.quantity} />
