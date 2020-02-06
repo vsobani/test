@@ -13,7 +13,7 @@ class NewBind extends React.Component{
     super(props)
     this.state = {
       quantity : 1,
-      isEnable : false
+      isEnable : true
     }
     this.MinusOne = this.MinusOne.bind(this);
     this.PlusOne = this.PlusOne.bind(this);
@@ -63,7 +63,7 @@ class NewBind extends React.Component{
          if(value.length > 0 )
         {
           // set the state of isEnable to be true to make the button to be enable
-          this.setState({isEnable : true})
+          this.setState({isEnable : false})
         }
 
 
@@ -93,7 +93,7 @@ class NewBind extends React.Component{
             
           {/* <button className="plus"  onClick={this.PlusOne}> + </button> */}
           {this.props.quantity < 2 ? <button className="plus"  onClick={this.PlusOne}> + </button>:this.quantity}
-          {this.props.quantity < 2 ? <button disabled={this.state.isEnable} className="plus"  onClick={this.MinusOne}> - </button>:null}
+          {this.props.quantity < 2 && this.state.isEnable ?  <button disabled={this.state.isEnable} className="plus"  onClick={this.MinusOne}> - </button>:null}
           {/* <button className="minus" onClick={this.MinusOne}> - </button><br/> */}
           {this.props.name}
           Quantity : <input name="quantity" onChange={this.takeQuantity} value={this.state.quantity} />
