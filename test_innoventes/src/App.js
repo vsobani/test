@@ -57,21 +57,19 @@ class NewBind extends React.Component{
     }
   }
 
-  handleButtonEnable(event)
-       {
-         const value = this.target.value;
-         if(value.length > 0 )
-        {
-          // set the state of isEnable to be true to make the button to be enable
-          this.setState({isEnable : false})
-        }
-
-
-       }
+  // handleButtonEnable(event)
+  //      {
+  //        const value = this.target.value;
+  //        if(value.length > 0 )
+  //       {
+  //         // set the state of isEnable to be true to make the button to be enable
+  //         this.setState({isEnable : false})
+  //       }        
+  //      }
 
   takeQuantity(event){
     let quantity = event.target.value;
-    if (quantity.length > 1 && !this.state.isEnable)
+    if (quantity)
         this.setState({
           quantity:parseInt(quantity)
         })
@@ -80,6 +78,7 @@ class NewBind extends React.Component{
   }
 
   render(){
+      const isEnable = this.state.isEnable
       return(
           <div>
            <div>
@@ -90,10 +89,10 @@ class NewBind extends React.Component{
           Quantity : {this.state.quantity}  <br/>
           </div>
           <div>
-            
+            {/* {this.props.quantity > 2 && isEnable ? <button onClick={this.PlusOne}> + </button>:null} */}
           {/* <button className="plus"  onClick={this.PlusOne}> + </button> */}
           {this.props.quantity < 2 ? <button className="plus"  onClick={this.PlusOne}> + </button>:this.quantity}
-          {this.props.quantity < 2 && this.state.isEnable ?  <button disabled={this.state.isEnable} className="plus"  onClick={this.MinusOne}> - </button>:null}
+          {this.props.quantity < 2 && this.state.isEnable ?  <button disabled={!this.state.isEnable} className="minus" onClick={this.MinusOne}> - </button>:this.state.quantity}
           {/* <button className="minus" onClick={this.MinusOne}> - </button><br/> */}
           {this.props.name}
           Quantity : <input name="quantity" onChange={this.takeQuantity} value={this.state.quantity} />
